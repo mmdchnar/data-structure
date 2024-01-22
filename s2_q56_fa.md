@@ -1,138 +1,57 @@
-# مقایسه ارتفاع در پایتون
+# مقایسه قد در پایتون
 
 ## مقدمه
 
-کد پایتون یک تابع فراهم می‌کند که بررسی می‌کند آیا بلندترین قد در یک لیست داده شده برابر یا بلندتر از دو برابر کوتاهترین شخص است یا خیر. این قابلیت مناسبی است برای سناریوهای مختلفی مانند تحلیل داده‌های ارتفاع انسان.
+کد پایتون یک تابع ارائه می‌دهد که بررسی می‌کند آیا بلندترین فرد در یک لیست داده شده برابر یا بلندتر از دو برابر قد کوتاه‌ترین فرد است. این قابلیت با پیچیدگی زمانی O(n) انجام شده و برای برنامه‌های مختلف مرتبط با داده‌های ارتفاع انسان مناسب است.
 
 ## توضیحات کد
 
 ```python
-class Node:
-    def __init__(self, val):
-        self.val = val
-        self.left = None
-        self.right = None
-        self.size = 1  # تعداد گره‌ها در زیردرختی که این گره ریشه آن است
+def is_tallest_double_of_shortest(heights: list):
+    if not heights or len(heights) < 2:
+        return False
 
+    shortest_height = float('inf')
+    tallest_height = float('-inf')
 
-class BST:
-    def __init__(self):
-        self.root = None
+    for height in heights:
+        if height < shortest_height:
+            shortest_height = height
+        if height > tallest_height:
+            tallest_height = height
 
-    def insert(self, x):
-        self.root = self._insert(self.root, x)
-
-    def _insert(self, node, x):
-        if node is None:
-            return Node(x)
-        if x < node.val:
-            node.left = self._insert(node.left, x)
-        else:
-            node.right = self._insert(node.right, x)
-        node.size = 1 + self._size(node.left) + self._size(node.right)
-        return node
-
-    def delete(self, x):
-        self.root = self._delete(self.root, x)
-
-    def _delete(self, node, x):
-        if node is None:
-            return None
-        if x < node.val:
-            node.left = self._delete(node.left, x)
-        elif x > node.val:
-            node.right = self._delete(node.right, x)
-        else:
-            if node.left is None:
-                return node.right
-            elif node.right is None:
-                return node.left
-            min_val = self._min(node.right)
-            node.val = min_val
-            node.right = self._delete(node.right, min_val)
-        node.size = 1 + self._size(node.left) + self._size(node.right)
-        return node
-
-    def find(self, a, b):
-        result = []
-        self._find(self.root, a, b, result)
-        return result
-
-    def _find(self, node, a, b, result):
-        if node is None:
-            return
-        if a <= node.val <= b:
-            result.append(node.val)
-        if node.val >= a:
-            self._find(node.left, a, b, result)
-        if node.val <= b:
-            self._find(node.right, a, b, result)
-
-    def _size(self, node):
-        return node.size if node else 0
-
-    def _min(self, node):
-        while node.left:
-            node = node.left
-        return node.val
+    return tallest_height >= 2 * shortest_height
 ```
 
-### جزئیات کلاس:
+### گام‌های الگوریتم:
 
-1. **کلاس `Node`**: نمایانگر یک گره در درخت جستجوی دودویی است که دارای مقدار (`val`)، اشاره به چپ و راست، و تعداد گره‌ها در زیردرختی که این گره ریشه آن است، است.
-
-2. **کلاس `BST`**: پیاده‌سازی درخت جستجوی دودویی است که دارای متدهای زیر است:
-
-    - **`__init__(self)`:** یک درخت خالی با ریشه `None` را مقداردهی اولیه می‌کند.
-    
-    - **`insert(self, x)`:** یک مقدار `x` را به درخت اضافه می‌کند. برای این عملیات از متد `_insert` خصوصی استفاده می‌شود.
-    
-    - **`_insert(self, node, x)`:** به صورت بازگشتی یک مقدار `x` را به درخت اضافه می‌کند و تعداد گره‌های زیردرخت فعلی را به‌روزرسانی می‌کند.
-    
-    - **`delete(self, x)`:** یک گره با مقدار `x` را از درخت حذف می‌کند. برای این عملیات از متد `_delete` خصوصی استفاده می‌شود.
-    
-    - **`_delete(self, node, x)`:** به صورت بازگشتی یک گره با مقدار `x` را از درخت حذف می‌کند و تعداد گره‌های زیردرخت فعلی را به‌روزرسانی می‌کند.
-    
-    - **`find(self, a, b)`:** نقاط در محدوده [a، b] را در درخت پیدا کرده و آن‌ها را به لیست `result` اضافه می‌کند. برای این عملیات از متد `_find` خصوصی استفاده می‌شود.
-    
-    - **`_find
-
-(self, node, a, b, result)`:** به صورت بازگشتی نقاط در محدوده [a، b] را در درخت پیدا کرده و آن‌ها را به لیست `result` اضافه می‌کند.
-    
-    - **`_size(self, node)`:** اندازه زیردرختی را که گره داده شده ریشه آن است، برمی‌گرداند یا اگر گره `None` باشد، 0 را برمی‌گرداند.
-    
-    - **`_min(self, node)`:** کمترین مقدار در زیردرختی که گره داده شده ریشه آن است، را برمی‌گرداند.
+1. `shortest_height` و `tallest_height` را به ترتیب به مثبت و منفی بی‌نهایت مقداردهی اولیه کنید.
+2. از لیست داده شده به عنوان `heights` عبور کنید.
+3. اگر ارتفاع فعلی کوچکتر باشد، `shortest_height` را به‌روز کنید.
+4. اگر ارتفاع فعلی بزرگتر باشد، `tallest_height` را به‌روز کنید.
+5. بررسی کنید آیا بلندترین ارتفاع برابر یا بلندتر از دو برابر کوتاه‌ترین ارتفاع است.
+6. اگر شرط برآورده شود، `True` را برگردانید؛ در غیر این صورت، `False` را برگردانید.
 
 ### پیچیدگی‌های زمانی:
 
-- **افزودن (`insert` و `_insert`):** O(log n) - پیچیدگی زمانی لگاریتمی.
-  
-- **حذف (`delete` و `_delete`):** O(log n) - پیچیدگی زمانی لگاریتمی.
-  
-- **یافتن نقاط (`find` و `_find`):** O(log n + k)، که در آن k تعداد نقاط در محدوده مشخص شده است.
+الگوریتم به پیچیدگی زمانی O(n) می‌رسد، که در آن n طول لیست ورودی است.
 
-## استفاده
+## مثال‌ها
 
+### مثال 1: False
 ```python
-bst = BST()
+heights_list_false = [160, 175, 150, 180, 155]
+result_false = is_tallest_double_of_shortest(heights_list_false)
+print(result_false)  # خروجی: False
+```
 
-# افزودن مقادیر
-bst.insert(5)
-bst.insert(3)
-bst.insert(7)
-bst.insert(1)
-bst.insert(4)
-bst.insert(6)
-bst.insert(9)
-
-# حذف یک مقدار
-bst.delete(4)
-
-# یافتن نقاط در محدوده [3، 7]
-points_in_range = bst.find(3, 7)
-print(points_in_range)  # خروجی: [3, 5, 6, 7]
+### مثال 2: True
+```python
+heights_list_true = [60, 175, 150, 180, 155, 190]
+result_true = is_tallest_double_of_shortest(heights_list_true)
+print(result_true)  # خروجی: True
 ```
 
 ## نتیجه‌گیری
 
-درخت جستجوی دودویی پیاده‌سازی شده در این کد، راه حلی کارآمد برای ذخیره و بازیابی نقاط روی محور X فراهم می‌کند. پیچیدگی‌های زمانی برای افزودن، حذف و یافتن نقاط در محدوده مشخص، این کد را مناسب برای انواع تحلیل‌های مربوط به ارتفاع انسان می‌سازد.
+این تابع مقایسه ارتفاع یک راه‌حل کارآمد برای تعیین اینکه آیا بلندترین فرد در یک لیست داده شده برابر یا بلندتر از دو برابر قد کوتاه‌ترین فرد است یا خیر فراهم می‌کند. این تابع با پیچیدگی زمانی O(n) عمل می‌کند که آن را برای موارد مختلف مرتبط با تجزیه و تحلیل ارتفاع مناسب می‌سازد.
