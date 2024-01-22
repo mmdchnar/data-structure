@@ -1,8 +1,8 @@
 import unittest
-import s2_q12
-import s4_q56
-import s4_q59
-import s3_q86
+import S2_Q12
+import S4_Q56
+import S4_Q59
+import S3_Q86
 
 
 class S2Q12TestCase(unittest.TestCase):
@@ -11,7 +11,7 @@ class S2Q12TestCase(unittest.TestCase):
         _output = [-1, -1, -1, 0, 0, 0, 1, 1, 1]
 
         self.assertEqual(
-            s2_q12.sort_array(_input),
+            S2_Q12.sort_array(_input),
             _output,
             "First test failed!"
         )
@@ -21,7 +21,7 @@ class S2Q12TestCase(unittest.TestCase):
         _output = [-1, -1, -1, -1, -1, 0, 0, 0, 0, 1, 1, 1, 1]
 
         self.assertEqual(
-            s2_q12.sort_array(_input),
+            S2_Q12.sort_array(_input),
             _output,
             "Second test failed!"
         )
@@ -32,7 +32,7 @@ class S4Q56(unittest.TestCase):
         _input = [160, 170, 150, 206, 102]
 
         self.assertTrue(
-            s4_q56.is_tallest_double_of_shortest(_input),
+            S4_Q56.is_tallest_double_of_shortest(_input),
             "The tallest person is 2 times or taller than the shortest person."
         )
 
@@ -40,7 +40,7 @@ class S4Q56(unittest.TestCase):
         _input = [160, 170, 150, 180, 140]
 
         self.assertFalse(
-            s4_q56.is_tallest_double_of_shortest(_input),
+            S4_Q56.is_tallest_double_of_shortest(_input),
             "The condition is not satisfied."
         )
 
@@ -48,7 +48,7 @@ class S4Q56(unittest.TestCase):
 class S4Q59(unittest.TestCase):
     @staticmethod
     def make_tree():
-        bst = s4_q59.BST()
+        bst = S4_Q59.BST()
 
         bst.insert(5)
         bst.insert(3)
@@ -87,7 +87,7 @@ class S4Q59(unittest.TestCase):
 class S3Q86(unittest.TestCase):
     @staticmethod
     def make_ds():
-        custom_ds = s3_q86.CustomDataStructure()
+        custom_ds = S3_Q86.CustomDataStructure()
         custom_ds.set(0, 5)
         custom_ds.set(2, 10)
         return custom_ds
