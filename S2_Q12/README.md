@@ -51,11 +51,9 @@ print(sorted_list)
 Output:
 
 ```
-[-1, 0, 0, 1, 1, -1]
+[-1, -1, 0, 0, 1, 1]
 ```
 
 ## Conclusion
 
 This sorting algorithm provides a practical solution for sorting lists with specific elements in linear time. It serves as an educational tool for understanding sorting algorithms and their applications in real-world scenarios.
-
----
