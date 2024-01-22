@@ -47,7 +47,7 @@ print(result_false)  # Output: False
 
 ### Example 2: True
 ```python
-heights_list_true = [160, 175, 150, 180, 155, 190]
+heights_list_true = [60, 175, 150, 180, 155, 190]
 result_true = is_tallest_double_of_shortest(heights_list_true)
 print(result_true)  # Output: True
 ```
