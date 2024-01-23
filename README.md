@@ -25,5 +25,7 @@ python3 test.py
 3. [ساختار داده سفارشی](https://github.com/mmdchnar/data-structure/blob/main/S3_Q86/README_fa.md)
 4. [درخت جستجوی دودویی (BST) برای نقاط محور X](https://github.com/mmdchnar/data-structure/blob/main/S4_Q59/README_fa.md)
 
+_سوالات برگرفته از کتاب 600 مساله چند گزینه‌ای از داده ساختار‌ها و الگوریتم‌ها
+نویسنده پروفسور محمد قدسی و آیدین نصیری شرق_
 
 _With the help of GPT 3.5 <3_
